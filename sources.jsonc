@@ -1,0 +1,49 @@
+{
+  // ── RSS 订阅源 ──────────────────────────────────────────────────────────────
+  // 注释掉某行即可禁用该源，添加新行即可增加自定义源。
+  "rss": [
+    // 大厂官方博客
+    { "name": "OpenAI Blog", "url": "https://openai.com/news/rss.xml" },
+    { "name": "Anthropic News", "url": "https://www.anthropic.com/news/rss.xml" },
+    { "name": "Google DeepMind Blog", "url": "https://deepmind.google/discover/blog/rss.xml" },
+    { "name": "Hugging Face Blog", "url": "https://huggingface.co/blog/feed.xml" },
+    { "name": "NVIDIA Technical Blog", "url": "https://developer.nvidia.com/blog/category/deep-learning/feed/" },
+    { "name": "Microsoft Research Blog", "url": "https://www.microsoft.com/en-us/research/feed/" },
+    // 科技媒体
+    { "name": "MIT Technology Review AI", "url": "https://www.technologyreview.com/feed/" },
+    { "name": "The Verge AI", "url": "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml" },
+    // 开发者/实践向
+    { "name": "Simon Willison LLMs", "url": "https://feeds.simonwillison.net/tags/llms.atom" },
+    { "name": "LangChain Blog", "url": "https://blog.langchain.com/rss/" }
+  ],
+
+  // ── GitHub 仓库搜索 ─────────────────────────────────────────────────────────
+  // 按关键词搜索昨天有更新、star >= 20 的仓库。
+  "github": {
+    "enabled": true,
+    "keywords": ["LLM", "agent", "RAG", "MCP", "AI coding", "multimodal"]
+  },
+
+  // ── GitHub Trending ─────────────────────────────────────────────────────────
+  // 抓取 GitHub Trending 榜单。
+  // since: "daily" | "weekly" | "monthly"
+  // language: 留空表示全语言，填 "python" 只看 Python 仓库
+  "githubTrending": {
+    "enabled": true,
+    "since": "daily",
+    "language": ""
+  },
+
+  // ── Hugging Face 每日精选论文 ────────────────────────────────────────────────
+  // 来自 HF 官方 API，社区精选，每天约 10-20 篇，自带 AI 摘要。
+  "huggingFacePapers": {
+    "enabled": true
+  },
+
+  // ── Hacker News ─────────────────────────────────────────────────────────────
+  // 按关键词搜索昨天的 HN 热帖。
+  "hackerNews": {
+    "enabled": true,
+    "keywords": ["LLM", "AI agent", "RAG", "OpenAI", "Anthropic", "DeepMind", "Hugging Face"]
+  }
+}

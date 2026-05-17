@@ -1,0 +1,82 @@
+name: Daily AI News
+
+on:
+  schedule:
+    - cron: "0 1 * * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Run without sending Feishu notification"
+        required: false
+        default: "false"
+
+permissions:
+  contents: write
+
+jobs:
+  daily:
+    runs-on: ubuntu-latest
+    env:
+      TZ: Asia/Shanghai
+      BASE_URL: ${{ vars.BASE_URL }}
+      AI_MODEL: ${{ vars.AI_MODEL || 'deepseek-chat' }}
+      AUTO_COMMIT_REPORT: ${{ vars.AUTO_COMMIT_REPORT || 'true' }}
+      REPORT_ARTIFACT: ${{ vars.REPORT_ARTIFACT || 'true' }}
+      MAX_ITEMS_PER_SOURCE: ${{ vars.MAX_ITEMS_PER_SOURCE || '30' }}
+      API_KEY: ${{ secrets.API_KEY }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      FEISHU_WEBHOOK_URL: ${{ secrets.FEISHU_WEBHOOK_URL }}
+      FEISHU_SECRET: ${{ secrets.FEISHU_SECRET }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.11.0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Test
+        run: pnpm test
+
+      - name: Type check
+        run: pnpm lint
+
+      - name: Generate report
+        run: |
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            pnpm dry-run
+          else
+            pnpm start
+          fi
+
+      - name: Upload report artifact
+        if: always() && env.REPORT_ARTIFACT == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: daily-ai-news-report
+          path: reports/*.md
+          if-no-files-found: ignore
+
+      - name: Commit report
+        if: env.AUTO_COMMIT_REPORT == 'true' && github.event.inputs.dry_run != 'true'
+        run: |
+          if git diff --quiet -- reports; then
+            echo "No report changes to commit"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/*.md
+          git commit -m "chore: add daily AI news report"
+          git push
