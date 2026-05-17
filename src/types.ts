@@ -104,6 +104,7 @@ export interface RuntimeConfig {
   autoCommitReport: boolean;
   reportArtifact: boolean;
   maxItemsPerSource: number;
+  maxItemsForAnalysis: number;
   dryRun: boolean;
   sources: SourcesConfig;
 }

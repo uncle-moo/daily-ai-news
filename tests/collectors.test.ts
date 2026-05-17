@@ -11,6 +11,7 @@ const config: RuntimeConfig = {
   autoCommitReport: true,
   reportArtifact: true,
   maxItemsPerSource: 10,
+  maxItemsForAnalysis: 10,
   dryRun: true,
   sources: {
     enabledSources: new Set(["rss", "github", "hacker-news"] as const),

@@ -13,6 +13,7 @@ const envSchema = z.object({
   AUTO_COMMIT_REPORT: z.string().default("true"),
   REPORT_ARTIFACT: z.string().default("true"),
   MAX_ITEMS_PER_SOURCE: z.string().default("30"),
+  MAX_ITEMS_FOR_ANALYSIS: z.string().default("10"),
 });
 
 function parseBoolean(value: string): boolean {
@@ -30,6 +31,11 @@ export function loadConfigFromEnv(
     throw new Error("MAX_ITEMS_PER_SOURCE must be a positive integer");
   }
 
+  const maxItemsForAnalysis = Number.parseInt(parsed.MAX_ITEMS_FOR_ANALYSIS, 10);
+  if (!Number.isFinite(maxItemsForAnalysis) || maxItemsForAnalysis < 1) {
+    throw new Error("MAX_ITEMS_FOR_ANALYSIS must be a positive integer");
+  }
+
   return {
     timezone: parsed.TZ,
     baseUrl: parsed.BASE_URL,
@@ -41,6 +47,7 @@ export function loadConfigFromEnv(
     autoCommitReport: parseBoolean(parsed.AUTO_COMMIT_REPORT),
     reportArtifact: parseBoolean(parsed.REPORT_ARTIFACT),
     maxItemsPerSource,
+    maxItemsForAnalysis,
     dryRun: options.dryRun ?? false,
     sources: loadSources(options.rootDir),
   };
