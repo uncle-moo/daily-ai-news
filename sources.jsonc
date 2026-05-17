@@ -3,18 +3,36 @@
   // 注释掉某行即可禁用该源，添加新行即可增加自定义源。
   "rss": [
     // 大厂官方博客
+    // OpenAI 官方新闻，覆盖模型发布、研究成果、产品更新
     { "name": "OpenAI Blog", "url": "https://openai.com/news/rss.xml" },
+    // Anthropic 官方博客，Claude 系列模型及 AI 安全研究
     { "name": "Anthropic News", "url": "https://www.anthropic.com/news/rss.xml" },
+    // Google DeepMind 博客，Gemini 及前沿 AI 研究
     { "name": "Google DeepMind Blog", "url": "https://deepmind.google/discover/blog/rss.xml" },
+    // Hugging Face 博客，开源模型、数据集、工具生态动态
     { "name": "Hugging Face Blog", "url": "https://huggingface.co/blog/feed.xml" },
+    // NVIDIA 技术博客，GPU、深度学习框架、推理优化
     { "name": "NVIDIA Technical Blog", "url": "https://developer.nvidia.com/blog/category/deep-learning/feed/" },
+    // 微软研究院博客，覆盖 AI 基础研究、应用研究及工具
     { "name": "Microsoft Research Blog", "url": "https://www.microsoft.com/en-us/research/feed/" },
     // 科技媒体
+    // MIT 科技评论 AI 专栏，深度分析，学术与产业兼顾
     { "name": "MIT Technology Review AI", "url": "https://www.technologyreview.com/feed/" },
+    // The Verge AI 频道，科技媒体中 AI 报道最及时的之一
     { "name": "The Verge AI", "url": "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml" },
     // 开发者/实践向
+    // Simon Willison 的 LLM 标签，Datasette 作者，LLM 实践领域更新最勤的独立博客
     { "name": "Simon Willison LLMs", "url": "https://feeds.simonwillison.net/tags/llms.atom" },
-    { "name": "LangChain Blog", "url": "https://blog.langchain.com/rss/" }
+    // LangChain 官方博客，Agent、RAG、LangGraph 框架动态
+    { "name": "LangChain Blog", "url": "https://blog.langchain.com/rss/" },
+    // 学术/研究
+    // 伯克利 AI 研究院博客，强化学习、视觉、NLP 等方向的研究成果
+    { "name": "BAIR Blog", "url": "https://bair.berkeley.edu/blog/feed.xml" },
+    // fast.ai 博客，Jeremy Howard 团队，深度学习实践与教育
+    { "name": "fast.ai", "url": "https://www.fast.ai/index.xml" },
+    // 云厂商
+    // AWS 机器学习博客，SageMaker、Bedrock 等 AWS AI 服务动态
+    { "name": "AWS Machine Learning Blog", "url": "https://aws.amazon.com/blogs/machine-learning/feed/" }
   ],
 
   // ── GitHub 仓库搜索 ─────────────────────────────────────────────────────────
